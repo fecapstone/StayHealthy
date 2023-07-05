@@ -48,7 +48,7 @@ const SignUp = () => {
                         </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name">UserName</label>
                         <input type="text" name="name" id="name" className="form-control" placeholder="Enter your name" aria-describedby="helpId" />
                     </div>
                     <div className="form-group">
