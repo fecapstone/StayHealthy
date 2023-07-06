@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Layout from './components/LandingPage/Components/Layout/Layout';
 import AOS from 'aos';
-import { Home, Login, SignUp } from './components';
+import { BookAppointments, Home, Login, SignUp } from './components';
 
 function App() {
   useEffect(() => {
@@ -21,6 +21,7 @@ function App() {
                 <Route path="/" element={<Home />}/>
                 <Route path="/login" element={<Login />}/>
                 <Route path="/signup" element={<SignUp />}/>
+                <Route path="/search/doctors" element={<BookAppointments />} />
 
 
               </Routes>
