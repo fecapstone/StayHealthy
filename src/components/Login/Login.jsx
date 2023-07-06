@@ -25,21 +25,13 @@ const Login = () => {
             <div className="login-grid">
               <div className="login-text">
                 <h2>Login</h2>
-                {loginRoleText && <div className="login-role">{loginRoleText}</div>}
+               
               </div>
               <div className="login-text">
                     Are you New Member? <span ><Link to="/signup" style={{color:'#2190FF'}}> Signup Here</Link></span>
-                </div>  
+              </div>  
               <div className="login-form">
                 <form onSubmit={handleLogin}>
-                  <div className="form-group">
-                    <label htmlFor="loginRole">Login Role</label>
-                    <select name="loginRole" id="loginRole" className="form-control" value={role} onChange={(e) => setRole(e.target.value)}>
-                      <option value="">Select Role</option>
-                      <option value="doctor">Doctor</option>
-                      <option value="patient">Patient</option>
-                    </select>
-                  </div>
                   <div className="form-group">
                     <label htmlFor="username">UserName</label>
                     <input type="text" name="username" id="username" className="form-control" placeholder="Enter your username" aria-describedby="helpId" />
@@ -55,7 +47,10 @@ const Login = () => {
                   <div className="btn-group">
                         <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Login</button>
                         <button type="reset" className="btn btn-danger mb-2 waves-effect waves-light">Reset</button>
-                    </div>
+                  </div>
+                  <div className="login-text">
+                  Forget Password <span ><Link to="/signup" style={{color:'#2190FF'}}> Signup Here</Link></span>
+                </div>  
                 </form>
               </div>
             </div>
