@@ -52,6 +52,7 @@ const FindDoctorSearch = () => {
         setSearchDoctor(speciality);
         setDoctorResultHidden(true);
         navigate(`/search/doctors?speciality=${speciality}&location=${searchLocation}`);
+        window.location.reload();
     }
 
     return (

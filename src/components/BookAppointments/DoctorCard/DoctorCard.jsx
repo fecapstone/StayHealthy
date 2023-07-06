@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -73,6 +73,13 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
   const [showModal, setShowModal] = useState(false);
   const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
 
+  // Check if appointment data exists in localStorage
+    useEffect(() => {
+        const storedData = localStorage.getItem(name);
+        if (storedData) {
+            setIsAppointmentBooked(true);
+        }
+    }, [name]);
     const handleBooking = () => {
         setShowModal(true);
     };
@@ -109,7 +116,7 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
                 <Popup
                     style={{backgroundColor:'#FFFFFF'}}
                 trigger={
-                    <button className='book-appointment-btn'>
+                    <button className={`book-appointment-btn ${isAppointmentBooked ? 'cancel-appointment' : ''}`}>
                     {isAppointmentBooked ? (
                         <div>Cancel Appointment</div>
                     ) : (

@@ -58,11 +58,12 @@ const BookAppointments = () => {
     }, [searchParams])
 
     return (
+        <center>
         <div  className="searchpage-container">
             <FindDoctorSearch onSearch={handleSearch} />
             <div className="search-results-container">
             {isSearched ? (
-                <>
+                <center>
                     <h2>{filteredDoctors.length} doctors available in {searchParams.get('location')}</h2>
                     <h3>Book appointments with minimum wait-time & verified doctor details</h3>
                     {filteredDoctors.length > 0 ? (
@@ -70,12 +71,13 @@ const BookAppointments = () => {
                     ) : (
                     <p>No doctors found.</p>
                     )}
-                </>
+                </center>
                 ) : (
                 <p>Perform a search to see the results.</p>
                 )}
             </div>
         </div>
+        </center>
     )
 }
 
