@@ -19,6 +19,9 @@ const AppointmentForm = ({ doctorName, onCancel }) => {
     };
 
     return (
+
+       <>
+        <h1>Book Your Appointment at Your Own Need</h1>
         <form onSubmit={handleFormSubmit}>
         <h3>Book Appointment</h3>
         <div>
@@ -51,6 +54,7 @@ const AppointmentForm = ({ doctorName, onCancel }) => {
             required
             />
         </div>
+   
         <div>
             <label htmlFor="time">Time:</label>
             <input
@@ -68,6 +72,7 @@ const AppointmentForm = ({ doctorName, onCancel }) => {
             </button>
         </div>
         </form>
+        </>
     );
 };
 

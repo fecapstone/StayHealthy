@@ -8,6 +8,7 @@
     --max-width: 1200px;
   }
 .footer {
+  /* position: sticky; */
     background-color: var(--text-dark);
     bottom:0;
     width:100%;
