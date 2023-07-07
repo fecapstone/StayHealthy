@@ -7,11 +7,17 @@
     --extra-light: #ffffff;
     --max-width: 1200px;
   }
-.footer {
-  /* position: sticky; */
+
+  .footer {
+    margin-top: 30%;
+    position: relative;
+    z-index: 1;
+    position: static;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background-color: var(--text-dark);
-    bottom:0;
-    width:100%;
+    z-index: 20; 
   }
   
   .footer__container {

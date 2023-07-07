@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './BookAppointments.css';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DoctorCard, FindDoctorSearch } from '.';
 
 
@@ -53,8 +53,13 @@ const BookAppointments = () => {
         };
         
 
+    const navigate = useNavigate();
     useEffect(() => {
         getDoctorsDetails();
+        const authtoken = sessionStorage.getItem("auth-token");
+        if (!authtoken) {
+            navigate("/login");
+        }
     }, [searchParams])
 
     return (

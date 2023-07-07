@@ -59,7 +59,7 @@ const FindDoctorSearch = () => {
       <div className='finddoctor'>
         <center>
             <h1>Find a dcotor at your own ease</h1>
-            <img src="https://media.istockphoto.com/id/1291377838/vector/doctor-on-laptop-computer-screen-telemedicine-medical-consultation-vector-stock-illustration.jpg?s=612x612&w=0&k=20&c=7uQfQfXNmeXUNAph5zlzNpUAaaOABQcrlamUOr6-YQY=" alt="" />
+            <img class="mainimg" src="https://media.istockphoto.com/id/1291377838/vector/doctor-on-laptop-computer-screen-telemedicine-medical-consultation-vector-stock-illustration.jpg?s=612x612&w=0&k=20&c=7uQfQfXNmeXUNAph5zlzNpUAaaOABQcrlamUOr6-YQY=" alt="" />
             <div className="home-search-container"  style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                 
                 {/* <div className="location-search-box">

@@ -7,6 +7,7 @@ import AOS from 'aos';
 import { BookAppointments, Home, Login, SignUp } from './components';
 import { Reviews } from './components/LandingPage/Components';
 import HealthTips from './components/HeathTips/HealthTips';
+import Setauthtoken from './Setauthtoken';
 
 function App() {
   useEffect(() => {
@@ -27,7 +28,10 @@ function App() {
                 <Route path="/signup" element={<SignUp />}/>
                 <Route path="/search/doctors" element={<BookAppointments />} />
 
-
+                <Route
+                  path="/setauthtoken/:authtoken"
+                  element={<Setauthtoken />}
+                />
               </Routes>
           </Layout>
         </Router>
