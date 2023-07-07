@@ -48,6 +48,7 @@ const reviews = [
   },
   // Add more review objects as needed
 ];
+
 const Reviews = () => (
     <div className="container">
     <Carousel renderDots={false} interval={5000}>
