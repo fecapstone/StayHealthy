@@ -109,12 +109,12 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
                         <div className="doctor-card-detail-experience">{experience} years experience overall</div>
                         <div className="doctor-card-detail-location">{location}</div>
                         <div className="doctor-card-detail-clinic">{clinic}</div>
-                        <div className="doctor-card-detail-consultationfees">₹{consultationFees} Consultation fees at clinic</div>
+                        <div className="doctor-card-detail-consultationfees">Ratings: {consultationFees} </div>
                     </div>
                 </div>
             <div className="doctor-card-options-container">
                 <Popup
-                    style={{backgroundColor:'#FFFFFF'}}
+                    style={{backgroundColor:'#FFFFFF', height:'100vh'}}
                 trigger={
                     <button className={`book-appointment-btn ${isAppointmentBooked ? 'cancel-appointment' : ''}`}>
                     {isAppointmentBooked ? (
@@ -133,7 +133,7 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
                     <div>
                     <div>
                     <div className="doctor-card-profile-image-container">
-                    <img src={profilePic} alt={name} />
+                        <img src={profilePic} alt={name} />
                     </div>
                     <div className="doctor-card-details">
                         <div className="doctor-card-detail-name">{name}</div>
@@ -141,7 +141,7 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
                         <div className="doctor-card-detail-experience">{experience} years experience overall</div>
                         <div className="doctor-card-detail-location">{location}</div>
                         <div className="doctor-card-detail-clinic">{clinic}</div>
-                        <div className="doctor-card-detail-consultationfees">₹{consultationFees} Consultation fees at clinic</div>
+                        <div className="doctor-card-detail-consultationfees">Ratings: {consultationFees} </div>
                     </div>
                     </div>
                     {isAppointmentBooked ? (
