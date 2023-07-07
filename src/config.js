@@ -1,4 +1,4 @@
-export const API_URL = window.location.hostname === "localhost" ? "http://localhost:8181" : "";
+export const API_URL = window.location.hostname === "localhost" ? "http://localhost:8181" : "https://stayhealthy-server.vercel.app";
 console.log(
     "API_URL :",
     API_URL
