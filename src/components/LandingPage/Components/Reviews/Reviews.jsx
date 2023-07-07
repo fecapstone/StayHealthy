@@ -1,84 +1,71 @@
-import React from 'react';
-import "./Reviews.css";
+import React from "react";
+import Carousel from "framer-motion-carousel";
+import './Reviews.css';
 
-const Reviews = () => {
-  return (
-    <div id='reviews'>
-              <h1 style={{textAlign:'center'}}>Review of our customers based on cosnultation</h1>
-
-      <div className='cards'>
-      <div className="card">
-        
-        <img src="https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg" alt="img" />
-    
-        <div class="review-content">
-            <div class="author">John Doe</div>
-            <div class="date">May 23,2078</div>
-            <div class="comment">The food is great for your health and it provides all the nutrions
-                required for your body</div>
-            <div class="rating">Rating:
-                <span>&#9733;&#9733;&#9733;&#9733;</span>
-                </div>
+const reviews = [
+  
+  {
+    author: "John Doe",
+    date: "May 23, 2078",
+    comment: "The food is great for your health and it provides all the nutrients required for your body",
+    rating: 4,
+    image: "https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg"
+  },
+  {
+    author: "John Doe",
+    date: "May 23, 2078",
+    comment: "The food is great for your health and it provides all the nutrients required for your body",
+    rating: 4,
+    image: "https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg"
+  },
+  {
+    author: "John Doe",
+    date: "May 23, 2078",
+    comment: "The food is great for your health and it provides all the nutrients required for your body",
+    rating: 4,
+    image: "https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg"
+  },
+  {
+    author: "John Doe",
+    date: "May 23, 2078",
+    comment: "The food is great for your health and it provides all the nutrients required for your body",
+    rating: 4,
+    image: "https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg"
+  },
+  {
+    author: "John Doe",
+    date: "May 23, 2078",
+    comment: "The food is great for your health and it provides all the nutrients required for your body",
+    rating: 4,
+    image: "https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg"
+  },
+  {
+    author: "John Doe",
+    date: "May 23, 2078",
+    comment: "The food is great for your health and it provides all the nutrients required for your body",
+    rating: 4,
+    image: "https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg"
+  },
+  // Add more review objects as needed
+];
+const Reviews = () => (
+    <div className="container">
+    <Carousel renderDots={false} interval={5000}>
+      {reviews.map((review, i) => (
+        <div className="slide" key={i}>
+          <img className="slide-image" src={review.image} alt="img" />
+          <div className="slide-content">
+            <div className="slide-author">{review.author}</div>
+            <div className="slide-date">{review.date}</div>
+            <div className="slide-comment">{review.comment}</div>
+            <div className="slide-rating">
+              Rating: <span>{"\u2605".repeat(review.rating)}</span>
             </div>
-    </div>
-    <div className="card">
-        
-            <img src="https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg" alt="img" />
-        
-            <div class="review-content">
-                <div class="author">John Doe</div>
-                <div class="date">May 23,2078</div>
-                <div class="comment">The food is great for your health and it provides all the nutrions
-                    required for your body</div>
-                <div class="rating">Rating:
-                    <span>&#9733;&#9733;&#9733;&#9733;</span>
-                    </div>
-                </div>
+          </div>
         </div>
-        <div className="card">
-        
-            <img src="https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg" alt="img" />
-        
-            <div class="review-content">
-                <div class="author">John Doe</div>
-                <div class="date">May 23,2078</div>
-                <div class="comment">The food is great for your health and it provides all the nutrions
-                    required for your body</div>
-                <div class="rating">Rating:
-                    <span>&#9733;&#9733;&#9733;&#9733;</span>
-                    </div>
-                </div>
-        </div>
-        <div className="card">
-        
-            <img src="https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg" alt="img" />
-        
-            <div class="review-content">
-                <div class="author">John Doe</div>
-                <div class="date">May 23,2078</div>
-                <div class="comment">The food is great for your health and it provides all the nutrions
-                    required for your body</div>
-                <div class="rating">Rating:
-                    <span>&#9733;&#9733;&#9733;&#9733;</span>
-                    </div>
-                </div>
-        </div>
-        <div className="card">
-            <img src="https://dg0qqklufr26k.cloudfront.net/wp-content/uploads/2019/09/psych-311-247-300x238.jpg" alt="img"/>
- 
-            <div class="review-content">
-                        <div class="author">John Doe</div>
-                        <div class="date">May 23,2078</div>
-                        <div class="comment">The food is great for your health and it provides all the nutrions
-                            required for your body</div>
-                        <div class="rating">Rating:
-                        <span>&#9733;&#9733;&#9733;&#9733;</span>
-                        </div>
-                    </div>
-</div>
-        </div>
-    </div>
-  )
-}
+      ))}
+    </Carousel>
+  </div>
+);
 
-export default Reviews
+export default Reviews;
