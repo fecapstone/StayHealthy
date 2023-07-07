@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
+=======
+import React ,{useEffect,useState}from 'react'
+>>>>>>> 721c587156bea5acbe7def2ca3cb2dc1c4773f21
 
 import "./Services.css";
 import { Link } from 'react-router-dom';
@@ -10,15 +14,15 @@ const demoData = [
     },
     {
         imageSrc: 'https://img.freepik.com/free-vector/doctor-character-background_1270-84.jpg?size=626&ext=jpg',
-        title: 'Book Appointments',
+        title: 'Book an appointment',
     },
     {
         imageSrc: 'https://img.freepik.com/free-vector/doctor-examining-patient-clinic-illustrated_23-2148856559.jpg?size=626&ext=jpg',
-        title: 'Find your doctor',
+        title: 'Find a doctor',
     },
     {
         imageSrc: 'https://img.freepik.com/free-vector/hospital-service-concept-flat-illustration_1150-50287.jpg?size=626&ext=jpg',
-        title: 'Help tips and guidence',
+        title: 'Health tips & guidence',
     },
 ]
 const healthQuotes = [
@@ -183,21 +187,29 @@ const Services = () => {
     
         return () => clearInterval(interval); // Cleanup interval on component unmount
       }, []);
+<<<<<<< HEAD
     
+=======
+>>>>>>> 721c587156bea5acbe7def2ca3cb2dc1c4773f21
     return (
         <div>
             <section class="services" id="services">
                 <div class="section__container services__container">
                     <h2 class="section__title">Best Services</h2>
                     <p class="section__subtitle">
+<<<<<<< HEAD
                     {randomQuote && <p>{randomQuote}</p>}
+=======
+                    {randomQuote && <p>{randomQuote}
+                    </p>}
+>>>>>>> 721c587156bea5acbe7def2ca3cb2dc1c4773f21
                     </p>
                     <div class="services__grid">
                         {demoData.map((data, index) => (
                             <div className="services__card" key={index}>
                                 <img src={data.imageSrc} alt="services" />
                                 <div className="services__details">
-                                {data.title === 'Book Appointments' ? (
+                                {data.title === 'Book an appointment' ? (
                                     <Link to="/search/doctors">
                                         <p>{data.title}</p>
                                     </Link>
