@@ -74,7 +74,12 @@
     display: flex;
     align-items: center;
     width: 430px;
-    position: relative;
+    position: absolute;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0,.1) 0 - 1px 0 0 inset;
+    border-radius: 5px;
+    height: 100vh;
 }
 
 .doctor-search-box>img {
@@ -88,19 +93,32 @@
     height: 40px;
     width: 100%;
     padding: 6px 20px 5px 10px;
-    border: 1px solid #ddd;
-    border-left: none;
     outline: none;
     cursor: pointer;
     font-size: 14px;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    border:1px solid rgb(59, 58, 58);
 }
 
+.findiconimg{
+    width: 40px;
+    left: 0;
+    background-color: rgb(239, 234, 234);
+    height: 40px;
+    border: 1px solid rgb(59, 58, 58);
+    z-index: -99;
+
+}
 .search-doctor-input-results {
     position: absolute;
-    top: 40px;
+    top: 55%;
     left: 0;
     width: 100%;
     z-index: 5;
+    height: 420px;
     margin-top: 2px;
     border: 1px solid #555;
 }
@@ -146,4 +164,16 @@
     padding: 20px 0;
     display: flex;
     align-items: center;
+}
+
+.finddoctor{
+    /* height: 0 auto; */
+    overflow: hidden;
+} 
+.finddoctor .mainimg{
+    width: 312px;
+    height: 312px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
 }

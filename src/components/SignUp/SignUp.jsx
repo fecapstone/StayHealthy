@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 
+
 import "./SignUp.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     const [role, setRole] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone,setPhone] = useState('');
+    const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+    // const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
     
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
     
-    const toggleConfirmPasswordVisibility = () => {
-        setConfirmPasswordVisible(!confirmPasswordVisible);
-    };
+    // const toggleConfirmPasswordVisibility = () => {
+    //     setConfirmPasswordVisible(!confirmPasswordVisible);
+    // };
     const updateSignupRoleText = (value) => {
         setRole(value);
     };
@@ -26,6 +31,43 @@ const SignUp = () => {
     } else if (role === 'patient') {
         signupRoleText = 'Signup as a Patient';
     }
+    const navigate = useNavigate();
+
+
+    const register = async (e) => {
+        e.preventDefault();
+    
+        // API Call
+        const response = await fetch("http://localhost:8181/api/auth/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password,
+                phone: phone,
+                role: role,
+            }),
+            });
+            const json = await response.json();
+            if (json.authtoken) {
+                sessionStorage.setItem("auth-token", json.authtoken);
+                sessionStorage.setItem("name", name);
+                // Redirect to home page
+                navigate("/");
+                window.location.reload()
+            } else {
+            if (json.errors) {
+                for (const error of json.errors) {
+                    console.error(error.msg);
+                }
+            } else {
+                console.error(json.error);
+            }
+        }
+    };
 
     return (
         <div className="container">
@@ -38,41 +80,43 @@ const SignUp = () => {
                     Already a member? <span ><Link to="/login" style={{color:'#2190FF'}}> Login In</Link></span>
                 </div>
                 <div className="signup-form">
-                <form action="" method="post">
+                <form method="POST" onSubmit={register}>
                     <div className="form-group">
                         <label htmlFor="role">Signup Role</label>
                         <select name="role" id="role" className="form-control" onChange={(e) => updateSignupRoleText(e.target.value)}>
                             <option value="">Select Role</option>
-                            <option value="doctor">Doctor</option>
-                            <option value="patient">Patient</option>
+                            <option value="doctor" onChange={(e) => setName(e.target.value)}>Doctor</option>
+                            <option value="patient" onChange={(e) => setName(e.target.value)}>Patient</option>
                         </select>
                     </div>
                     <div className="form-group">
                         <label htmlFor="name">UserName</label>
-                        <input type="text" name="name" id="name" className="form-control" placeholder="Enter your name" aria-describedby="helpId" />
+                        <input value={name} type="text" onChange={(e) => setName(e.target.value)} name="name" id="name" className="form-control" placeholder="Enter your name" aria-describedby="helpId" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="phone">Phone</label>
+                        <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" name="phone" id="phone" className="form-control" placeholder="Enter your phone number" aria-describedby="helpId" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input type="email" name="email" id="email" className="form-control" placeholder="Enter your email" aria-describedby="helpId" />
+                        <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="form-control" placeholder="Enter your email" aria-describedby="helpId" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type={passwordVisible ? 'text' : 'password'} name="password" id="password" className="form-control" placeholder="Enter your password" aria-describedby="helpId" />
+                        <input value={password} onChange={(e) => setPassword(e.target.value)} type={passwordVisible ? 'text' : 'password'} name="password" id="password" className="form-control" placeholder="Enter your password" aria-describedby="helpId" />
                         <div className="password-visibility" onClick={togglePasswordVisibility}>
                             <i class={passwordVisible ? 'fa fa-eye' : 'fa fa-eye-slash'}></i>
                         </div>  
                     </div>
-                    <div className="form-group">
+
+                    {/* <div className="form-group">
                         <label htmlFor="confirmPassword">Confirm Password</label>
                         <input type={confirmPasswordVisible ? 'text' : 'password'} name="confirmPassword" id="confirmPassword" className="form-control" placeholder="Enter your confirm password" aria-describedby="helpId" />
                         <div className="password-visibility" onClick={toggleConfirmPasswordVisibility}>
                             <i class={confirmPasswordVisible ? 'fa fa-eye' : 'fa fa-eye-slash'}></i>
                         </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone</label>
-                        <input type="tel" name="phone" id="phone" className="form-control" placeholder="Enter your phone number" aria-describedby="helpId" />
-                    </div>
+                    </div> */}
+                    
                     
                     <div className="btn-group">
                         <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Submit</button>

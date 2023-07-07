@@ -3,3 +3,7 @@
     font-family: "Poppins", sans-serif;
     box-sizing: border-box;
 }
+/* Hide scrollbar */
+*::-webkit-scrollbar {
+    display: none;
+}

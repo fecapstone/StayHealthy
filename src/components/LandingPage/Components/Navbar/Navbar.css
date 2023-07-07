@@ -94,4 +94,31 @@ nav {
         opacity: 1;
     }
 }
+.btn1{
+  border: 2px solid #3685fb;
+  background-color: white;
+  color: black;
+  border-radius: 50px;
+}
 
+.btn1:hover{
+  background-color: #3685fb;
+  color: white;
+}
+
+.btn2{
+  border: 2px solid #3685fb;
+  background-color: white;
+  color: black;
+  border-radius: 50px;
+  height:30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:3px;
+}
+
+.btn2:hover{
+  background-color: #3685fb;
+  color: white;
+}

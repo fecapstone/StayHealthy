@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './BookAppointments.css';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DoctorCard, FindDoctorSearch } from '.';
 
 
@@ -16,9 +16,13 @@ const BookAppointments = () => {
         .then(res => res.json())
         .then(data => {
             if (searchParams.get('speciality')) {
+                // window.reload()
                 const filtered = data.filter(doctor => doctor.speciality.toLowerCase() === searchParams.get('speciality').toLowerCase());
+
                 setFilteredDoctors(filtered);
+                
                 setIsSearched(true);
+                window.reload()
             } else {
                 setFilteredDoctors([]);
                 setIsSearched(false);
@@ -29,22 +33,33 @@ const BookAppointments = () => {
     }
 
     const handleSearch = (searchText) => {
+
         if (searchText === '') {
             setFilteredDoctors([]);
             setIsSearched(false);
             } else {
+                
             const filtered = doctors.filter(
                 (doctor) =>
+                // 
                 doctor.speciality.toLowerCase().includes(searchText.toLowerCase())
-            );
+                
+                );
+                
             setFilteredDoctors(filtered);
             setIsSearched(true);
+            window.reload()
         }
         };
         
 
+    const navigate = useNavigate();
     useEffect(() => {
         getDoctorsDetails();
+        const authtoken = sessionStorage.getItem("auth-token");
+        if (!authtoken) {
+            navigate("/login");
+        }
     }, [searchParams])
 
     return (
@@ -63,7 +78,7 @@ const BookAppointments = () => {
                     )}
                 </center>
                 ) : (
-                <p>Perform a search to see the results.</p>
+                ''
                 )}
             </div>
         </div>

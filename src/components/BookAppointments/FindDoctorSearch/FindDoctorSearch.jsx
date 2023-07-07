@@ -56,9 +56,13 @@ const FindDoctorSearch = () => {
     }
 
     return (
+      <div className='finddoctor'>
         <center>
-            <div className="home-search-container">
-                <div className="location-search-box">
+            <h1>Find a dcotor at your own ease</h1>
+            <img class="mainimg" src="https://media.istockphoto.com/id/1291377838/vector/doctor-on-laptop-computer-screen-telemedicine-medical-consultation-vector-stock-illustration.jpg?s=612x612&w=0&k=20&c=7uQfQfXNmeXUNAph5zlzNpUAaaOABQcrlamUOr6-YQY=" alt="" />
+            <div className="home-search-container"  style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+                
+                {/* <div className="location-search-box">
                     <img src={process.env.PUBLIC_URL + '/images/home_location_icon.svg'} alt="" width="22" />
                     <input type="text" className="search-location-input-box" placeholder="Search location" onFocus={() => setLocationResultHidden(false)} onBlur={() => setLocationResultHidden(true)} value={searchLocation} onChange={(e) => setSearchLocation(e.target.value)} />
                     <div className="search-location-input-results" hidden={locationResultHidden}>
@@ -69,10 +73,13 @@ const FindDoctorSearch = () => {
                             </div>)
                         }
                     </div>
-                </div>
+                </div> */}
                 <div className="doctor-search-box">
-                    <img src={process.env.PUBLIC_URL + '/images/search.svg'} alt="" width="22" />
+                {/* <p>Perform a search to see the results.</p> */}
+
                     <input type="text" className="search-doctor-input-box" placeholder="Search doctors, clinics, hospitals, etc." onFocus={() => setDoctorResultHidden(false)} onBlur={() => setDoctorResultHidden(true)} value={searchDoctor} onChange={(e) => setSearchDoctor(e.target.value)} />
+                    
+                    <div className="findiconimg"><img className='findIcon' src={process.env.PUBLIC_URL + '/images/search.svg'} alt=""/></div>
                     <div className="search-doctor-input-results" hidden={doctorResultHidden}>
                         {
                             specialities.map(speciality => <div className="search-doctor-result-item" key={speciality} onMouseDown={() => handleDoctorSelect(speciality)}>
@@ -85,6 +92,7 @@ const FindDoctorSearch = () => {
                 </div>
             </div>
         </center>
+        </div>
     );
 }
 
