@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import "./SignUp.css";
 import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../config';
 
 const SignUp = () => {
     const [role, setRole] = useState('');
@@ -38,7 +39,7 @@ const SignUp = () => {
         e.preventDefault();
     
         // API Call
-        const response = await fetch("http://localhost:8181/api/auth/register", {
+        const response = await fetch(`${API_URL}/api/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
