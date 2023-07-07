@@ -17,6 +17,11 @@ const AppointmentForm = ({ doctorName, onCancel }) => {
         setDate('');
         setTime('');
     };
+    const [selectedSlot, setSelectedSlot] = useState(null);
+
+  const handleSlotSelection = (slot) => {
+    setSelectedSlot(slot);
+  };
 
     return (
 
@@ -56,14 +61,40 @@ const AppointmentForm = ({ doctorName, onCancel }) => {
         </div>
    
         <div>
-            <label htmlFor="time">Time:</label>
-            <input
+            <label htmlFor="time">Choose Slot:</label>
+            {/* <input
             type="time"
             id="time"
             value={time}
             onChange={(e) => setTime(e.target.value)}
             required
-            />
+            /> */}
+              <div>
+        <button
+          onClick={() => handleSlotSelection('Slot 1')}
+          disabled={selectedSlot === 'Slot 1'}
+        >
+          Slot 1
+        </button>
+        <button
+          onClick={() => handleSlotSelection('Slot 2')}
+          disabled={selectedSlot === 'Slot 2'}
+        >
+          Slot 2
+        </button>
+        <button
+          onClick={() => handleSlotSelection('Slot 3')}
+          disabled={selectedSlot === 'Slot 3'}
+        >
+          Slot 3
+        </button>
+        <button
+          onClick={() => handleSlotSelection('Slot 4')}
+          disabled={selectedSlot === 'Slot 4'}
+        >
+          Slot 4
+        </button>
+      </div>
         </div>
         <div>
             <button type="submit">Book Now</button>

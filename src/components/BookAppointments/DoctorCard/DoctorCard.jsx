@@ -10,7 +10,18 @@ const AppointmentForm = ({ doctorName, onSubmit }) => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
-
+  
+        const [selectedSlot, setSelectedSlot] = useState(null);
+      
+        const handleSlotSelection = (slot) => {
+          setSelectedSlot(slot);
+        };
+    // const handleSlotSelection = (slot,i) => {
+    //     console.log(slot);
+    //     console.log(setSelectedSlot(slot));
+    //   setSelectedSlot(slot);
+    //  document.getElementById(`btnslot${i}`).style.backgroundColor='green'
+    // };
     const handleFormSubmit = (e) => {
         e.preventDefault();
         onSubmit({ name, phoneNumber, date, time });
@@ -54,14 +65,52 @@ const AppointmentForm = ({ doctorName, onSubmit }) => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="time">Time:</label>
-                <input
+                <label htmlFor="time">Book Slot:</label>
+                {/* <input
                 type="time"
                 id="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
                 required
-                />
+                /> */}
+      <input
+    //    className='btnslot'
+          type="submit"
+          value="Slot 1" disabled
+        //   disabled={selectedSlot === 'Slot 1'} 
+      
+          onClick={(e) => {
+            e.preventDefault();
+            handleSlotSelection('Slot 1');
+          }}
+        />
+        <input className='btnslot'
+          type="submit"
+          value="Slot 2"
+          disabled={selectedSlot === 'Slot 2'}
+          onClick={(e) => {
+            e.preventDefault();
+            handleSlotSelection('Slot 2');
+          }}
+        />
+        <input className='btnslot'
+          type="submit"
+          value="Slot 3"
+          disabled={selectedSlot === 'Slot 3'}
+          onClick={(e) => {
+            e.preventDefault();
+            handleSlotSelection('Slot 3');
+          }}
+        />
+        <input className='btnslot'
+          type="submit"
+          value="Slot 4"
+          disabled={selectedSlot === 'Slot 4'}
+          onClick={(e) => {
+            e.preventDefault();
+            handleSlotSelection('Slot 4');
+          }}
+        />
             </div>
             <button type="submit">Book Now</button>
             </form>
@@ -109,12 +158,12 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
                         <div className="doctor-card-detail-experience">{experience} years experience overall</div>
                         <div className="doctor-card-detail-location">{location}</div>
                         <div className="doctor-card-detail-clinic">{clinic}</div>
-                        <div className="doctor-card-detail-consultationfees">₹{consultationFees} Consultation fees at clinic</div>
+                        <div className="doctor-card-detail-consultationfees">Rating:{consultationFees}</div>
                     </div>
                 </div>
             <div className="doctor-card-options-container">
                 <Popup
-                    style={{backgroundColor:'#FFFFFF'}}
+                    style={{backgroundColor:'#FFFFFF', height:'100%'}}
                 trigger={
                     <button className={`book-appointment-btn ${isAppointmentBooked ? 'cancel-appointment' : ''}`}>
                     {isAppointmentBooked ? (
@@ -130,7 +179,7 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
                 onClose={() => setShowModal(false)}
                 >
                 {(close) => (
-                    <div>
+                    <div className='doctorbg' style={{height:'100vh',overflow:'scroll',}}>
                     <div>
                     <div className="doctor-card-profile-image-container">
                     <img src={profilePic} alt={name} />
@@ -141,7 +190,7 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
                         <div className="doctor-card-detail-experience">{experience} years experience overall</div>
                         <div className="doctor-card-detail-location">{location}</div>
                         <div className="doctor-card-detail-clinic">{clinic}</div>
-                        <div className="doctor-card-detail-consultationfees">₹{consultationFees} Consultation fees at clinic</div>
+                        <div className="doctor-card-detail-consultationfees">Rating:{consultationFees}</div>
                     </div>
                     </div>
                     {isAppointmentBooked ? (

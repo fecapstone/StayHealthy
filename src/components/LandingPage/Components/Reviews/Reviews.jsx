@@ -3,7 +3,7 @@ import "./Reviews.css";
 
 const Reviews = () => {
   return (
-    <div>
+    <div id='reviews'>
               <h1 style={{textAlign:'center'}}>Review of our customers based on cosnultation</h1>
 
       <div className='cards'>

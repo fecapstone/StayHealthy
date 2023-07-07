@@ -73,7 +73,7 @@ const BookAppointments = () => {
                     )}
                 </center>
                 ) : (
-                <p>Perform a search to see the results.</p>
+                ''
                 )}
             </div>
         </div>
