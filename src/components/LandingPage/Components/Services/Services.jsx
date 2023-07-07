@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-=======
 import React ,{useEffect,useState}from 'react'
->>>>>>> 721c587156bea5acbe7def2ca3cb2dc1c4773f21
 
 import "./Services.css";
 import { Link } from 'react-router-dom';
@@ -187,22 +183,14 @@ const Services = () => {
     
         return () => clearInterval(interval); // Cleanup interval on component unmount
       }, []);
-<<<<<<< HEAD
-    
-=======
->>>>>>> 721c587156bea5acbe7def2ca3cb2dc1c4773f21
     return (
         <div>
             <section class="services" id="services">
                 <div class="section__container services__container">
                     <h2 class="section__title">Best Services</h2>
                     <p class="section__subtitle">
-<<<<<<< HEAD
-                    {randomQuote && <p>{randomQuote}</p>}
-=======
                     {randomQuote && <p>{randomQuote}
                     </p>}
->>>>>>> 721c587156bea5acbe7def2ca3cb2dc1c4773f21
                     </p>
                     <div class="services__grid">
                         {demoData.map((data, index) => (
