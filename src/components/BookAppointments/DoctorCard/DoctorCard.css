@@ -115,7 +115,14 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+.doctorbg{
+  -webkit-scrollbar {
+    display: none;
+}
 
+
+
+}
 .modal-btn:hover {
   background-color: #0d8af5;
 }
@@ -140,6 +147,8 @@
   padding: 20px;
   background-color: #f5f5f5;
   border-radius: 8px;
+  /* height: auto;
+  overflow-y: auto; */
 }
 
 .form-group {
@@ -173,4 +182,11 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+
+.btnslot{
+  background-color: green;
+  cursor: pointer;
+  /* color: rgb(249, 60, 60); */
 }

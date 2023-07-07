@@ -16,9 +16,13 @@ const BookAppointments = () => {
         .then(res => res.json())
         .then(data => {
             if (searchParams.get('speciality')) {
+                // window.reload()
                 const filtered = data.filter(doctor => doctor.speciality.toLowerCase() === searchParams.get('speciality').toLowerCase());
+
                 setFilteredDoctors(filtered);
+                
                 setIsSearched(true);
+                window.reload()
             } else {
                 setFilteredDoctors([]);
                 setIsSearched(false);
@@ -29,16 +33,22 @@ const BookAppointments = () => {
     }
 
     const handleSearch = (searchText) => {
+
         if (searchText === '') {
             setFilteredDoctors([]);
             setIsSearched(false);
             } else {
+                
             const filtered = doctors.filter(
                 (doctor) =>
+                // 
                 doctor.speciality.toLowerCase().includes(searchText.toLowerCase())
-            );
+                
+                );
+                
             setFilteredDoctors(filtered);
             setIsSearched(true);
+            window.reload()
         }
         };
         
@@ -63,7 +73,7 @@ const BookAppointments = () => {
                     )}
                 </center>
                 ) : (
-                <p>Perform a search to see the results.</p>
+                ''
                 )}
             </div>
         </div>
