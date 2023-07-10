@@ -50,7 +50,7 @@ const reviews = [
 ];
 
 const Reviews = () => (
-    <div className="container">
+    <div className="containerR">
     <Carousel renderDots={false} interval={5000}>
       {reviews.map((review, i) => (
         <div className="slide" key={i}>

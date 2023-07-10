@@ -56,6 +56,9 @@ const SignUp = () => {
             if (json.authtoken) {
                 sessionStorage.setItem("auth-token", json.authtoken);
                 sessionStorage.setItem("name", name);
+                // phone and email
+                sessionStorage.setItem("phone", phone);
+                sessionStorage.setItem("email", email);
                 // Redirect to home page
                 navigate("/");
                 window.location.reload()
@@ -71,7 +74,7 @@ const SignUp = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container" style={{marginTop:'5%'}}>
             <div className="signup-grid">
                 <div className="signup-text">
                     <h1>Signup</h1>

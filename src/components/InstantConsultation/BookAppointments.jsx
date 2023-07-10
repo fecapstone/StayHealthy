@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './BookAppointments.css';
+import '../BookAppointments/BookAppointments.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { DoctorCard, FindDoctorSearch } from '.';
+import FindDoctorSearch from './FindDoctorSearch';
+// import DoctorCard from './DoctorCard';
+import InstantConsultation from './InstantConsultation';
 
-
-const BookAppointments = () => {
+const BookAppointments1 = () => {
     const [searchParams] = useSearchParams();
     const [doctors, setDoctors] = useState([]);
     const [filteredDoctors, setFilteredDoctors] = useState([]);
@@ -41,7 +42,6 @@ const BookAppointments = () => {
                 
             const filtered = doctors.filter(
                 (doctor) =>
-                // 
                 doctor.speciality.toLowerCase().includes(searchText.toLowerCase())
                 
             );
@@ -64,7 +64,7 @@ const BookAppointments = () => {
 
     return (
         <center>
-        <div  className="searchpage-container">
+        <div style={{marginTop:'10%'}}  className="searchpage-container">
             <FindDoctorSearch onSearch={handleSearch} />
             <div className="search-results-container">
             {isSearched ? (
@@ -72,7 +72,7 @@ const BookAppointments = () => {
                     <h2>{filteredDoctors.length} doctors available in {searchParams.get('location')}</h2>
                     <h3>Book appointments with minimum wait-time & verified doctor details</h3>
                     {filteredDoctors.length > 0 ? (
-                    filteredDoctors.map(doctor => <DoctorCard className="doctorcard" {...doctor} key={doctor.name} />)
+                    filteredDoctors.map(doctor => <InstantConsultation className="doctorcard" {...doctor} key={doctor.name} />)
                     ) : (
                     <p>No doctors found.</p>
                     )}
@@ -86,4 +86,4 @@ const BookAppointments = () => {
     )
 }
 
-export default BookAppointments;
+export default BookAppointments1;

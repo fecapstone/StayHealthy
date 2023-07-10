@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import './DoctorCard.css';
-import AppointmentCard from '../../AppointmentCard/AppointmentCard';
+// import uuid4
+import { v4 as uuidv4 } from 'uuid';
 
 // AppointmentForm component
-const AppointmentForm = ({ doctorName, onSubmit }) => {
+const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [date, setDate] = useState('');
@@ -66,7 +67,18 @@ const AppointmentForm = ({ doctorName, onSubmit }) => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="time">Book Slot:</label>
+                <label htmlFor="time">Book Time Slot:</label>
+                <select
+                  id="time"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                  required
+                >
+                  <option value="">Select a time slot</option>
+                  <option value="9:00 AM">9:00 AM</option>
+                  <option value="10:00 AM">10:00 AM</option>
+                  {/* Add more options for different time slots */}
+                </select>
                 {/* <input
                 type="time"
                 id="time"
@@ -74,17 +86,13 @@ const AppointmentForm = ({ doctorName, onSubmit }) => {
                 onChange={(e) => setTime(e.target.value)}
                 required
                 /> */}
-      <input
-    //    className='btnslot'
-          type="submit"
-          value="Slot 1" disabled
-        //   disabled={selectedSlot === 'Slot 1'} 
-      
-          onClick={(e) => {
-            e.preventDefault();
-            handleSlotSelection('Slot 1');
-          }}
-        />
+            {/* <input type="submit"
+              value="Slot 1" disabled      
+              onClick={(e) => {
+                e.preventDefault();
+                handleSlotSelection('Slot 1');
+              }}
+            />
         <input className='btnslot'
           type="submit"
           value="Slot 2"
@@ -111,7 +119,7 @@ const AppointmentForm = ({ doctorName, onSubmit }) => {
             e.preventDefault();
             handleSlotSelection('Slot 4');
           }}
-        />
+        /> */}
             </div>
             <button type="submit">Book Now</button>
             </form>
@@ -121,157 +129,161 @@ const AppointmentForm = ({ doctorName, onSubmit }) => {
 
 const DoctorCard = ({ name, speciality, experience, location, clinic, consultationFees, profilePic }) => {
   const [showModal, setShowModal] = useState(false);
-  const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
-  const [appointmentData, setAppointmentData] = useState(null);
+  // const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
+  // const [appointmentData, setAppointmentData] = useState(null);
 
+  const [appointments, setAppointments] = useState([]);
 
   // Check if appointment data exists in localStorage
   useEffect(() => {
-    const storedData = localStorage.getItem(name);
-    if (storedData) {
-      setIsAppointmentBooked(true);
-      setAppointmentData(JSON.parse(storedData));
+    // const storedData = localStorage.getItem(name);
+    // if (storedData) {
+    //   setIsAppointmentBooked(true);
+    //   setAppointmentData(JSON.parse(storedData));
+    // }
+    const storedAppointments = JSON.parse(localStorage.getItem(name));
+    if (storedAppointments) {
+      setAppointments(storedAppointments);
     }
   }, [name]);
     const handleBooking = () => {
         setShowModal(true);
     };
 
-    const handleCancel = () => {
+    // const handleCancel = () => {
+    //     localStorage.removeItem(name);
+    //     setIsAppointmentBooked(false);
+    //     setAppointmentData(null);
+    // };
+    const handleCancel = (appointmentId) => {
+      const updatedAppointments = appointments.filter(appointment => appointment.id !== appointmentId);
+      setAppointments(updatedAppointments);
+      localStorage.setItem(name, JSON.stringify(updatedAppointments));
+      // remove item from localStorage
+      if (updatedAppointments.length === 0) {
         localStorage.removeItem(name);
-        setIsAppointmentBooked(false);
-        setAppointmentData(null);
+        localStorage.removeItem("doctorData");
+      }
+      console.log("cancel clicked");
+      window.location.reload();
     };
+
     const handleFormSubmit = (appointmentData) => {
-        localStorage.setItem(name, JSON.stringify(appointmentData));
-        setIsAppointmentBooked(true);
-        setShowModal(false);
-        setAppointmentData(appointmentData);
+      const newAppointment = {
+        id: uuidv4(),
+        ...appointmentData
       };
+      const doctorData = {
+        name: name,
+        speciality: speciality,
+      };
+      localStorage.setItem('doctorData', JSON.stringify(doctorData));
+      const updatedAppointments = [...appointments, newAppointment];
+      setAppointments(updatedAppointments);
+      localStorage.setItem(name, JSON.stringify(updatedAppointments));
+      setShowModal(false);
+      window.location.reload();
+      
+    };
+    // const handleFormSubmit = (appointmentData) => {
+        // const doctorData = {
+        //   name: name,
+        //   speciality: speciality,
+        // };
+    //     localStorage.setItem('doctorData', JSON.stringify(doctorData));
+    //     localStorage.setItem(name, JSON.stringify(appointmentData));
+    //     setIsAppointmentBooked(true);
+    //     setShowModal(false);
+    //     setAppointmentData(appointmentData);
+    //     window.location.reload();
+    //   };
 
     return (
-        // <div className="doctor-card-container">
-        //     <div className="doctor-card-details-container">
-        //         <div className="doctor-card-profile-image-container">
-        //             <img src={profilePic} alt={name} />
-        //             </div>
-        //             <div className="doctor-card-details">
-        //                 <div className="doctor-card-detail-name">{name}</div>
-        //                 <div className="doctor-card-detail-speciality">{speciality}</div>
-        //                 <div className="doctor-card-detail-experience">{experience} years experience overall</div>
-        //                 <div className="doctor-card-detail-location">{location}</div>
-        //                 <div className="doctor-card-detail-clinic">{clinic}</div>
-        //                 <div className="doctor-card-detail-consultationfees">Ratings: {consultationFees}</div>
-        //             </div>
-        //         </div>
-        //     <div className="doctor-card-options-container">
-        //         <Popup
-        //             style={{backgroundColor:'#FFFFFF'}}
-        //         trigger={
-        //             <button className={`book-appointment-btn ${isAppointmentBooked ? 'cancel-appointment' : ''}`}>
-        //             {isAppointmentBooked ? (
-        //                 <div>Cancel Appointment</div>
-        //             ) : (
-        //                 <div>Book Appointment</div>
-        //             )}
-        //             <div>No Booking Fee</div>
-        //             </button>
-        //         }
-        //         modal
-        //         open={showModal}
-        //         onClose={() => setShowModal(false)}
-        //         >
-        //         {(close) => (
-        //             <div className='doctorbg' style={{height:'100vh',overflow:'scroll',}}>
-        //             <div>
-        //             <div className="doctor-card-profile-image-container">
-        //                 <img src={profilePic} alt={name} />
-        //             </div>
-        //             <div className="doctor-card-details">
-        //                 <div className="doctor-card-detail-name">{name}</div>
-        //                 <div className="doctor-card-detail-speciality">{speciality}</div>
-        //                 <div className="doctor-card-detail-experience">{experience} years experience overall</div>
-        //                 <div className="doctor-card-detail-location">{location}</div>
-        //                 <div className="doctor-card-detail-clinic">{clinic}</div>
-        //                 <div className="doctor-card-detail-consultationfees">Ratings: {consultationFees}</div>
-        //             </div>
-        //             </div>
-        //             {isAppointmentBooked ? (
-        //                 <div>
-        //                 <h3 style={{textAlign: 'center'}}>Appointment Booked!</h3>
-        //                 <button onClick={() => { close(); handleCancel(); }}>Cancel Appointment</button>
-        //                 </div>
-        //             ) : (
-        //                 <AppointmentForm doctorName={name} onSubmit={handleFormSubmit} />
-        //             )}
-        //             </div>
-        //         )}
-        //         </Popup>
-        //     </div>
-        // </div>
+        
         <div className="doctor-card-container">
-      <div className="doctor-card-details-container">
-        <div className="doctor-card-profile-image-container">
-          <img src={profilePic} alt={name} />
-        </div>
-        <div className="doctor-card-details">
-          <div className="doctor-card-detail-name">{name}</div>
-          <div className="doctor-card-detail-speciality">{speciality}</div>
-          <div className="doctor-card-detail-experience">{experience} years experience overall</div>
-          <div className="doctor-card-detail-location">{location}</div>
-          <div className="doctor-card-detail-clinic">{clinic}</div>
-          <div className="doctor-card-detail-consultationfees">Ratings: {consultationFees}</div>
-        </div>
-      </div>
-      <div className="doctor-card-options-container">
-        <Popup
-          style={{ backgroundColor: '#FFFFFF' }}
-          trigger={
-            <button className={`book-appointment-btn ${isAppointmentBooked ? 'cancel-appointment' : ''}`}>
-              {isAppointmentBooked ? (
-                <div>Cancel Appointment</div>
-              ) : (
-                <div>Book Appointment</div>
-              )}
-              <div>No Booking Fee</div>
-            </button>
-          }
-          modal
-          open={showModal}
-          onClose={() => setShowModal(false)}
-        >
-          {(close) => (
-            <div className="doctorbg" style={{ height: '100vh', overflow: 'scroll' }}>
-              <div>
-                <div className="doctor-card-profile-image-container">
-                  <img src={profilePic} alt={name} />
-                </div>
-                <div className="doctor-card-details">
-                  <div className="doctor-card-detail-name">{name}</div>
-                  <div className="doctor-card-detail-speciality">{speciality}</div>
-                  <div className="doctor-card-detail-experience">{experience} years experience overall</div>
-                  <div className="doctor-card-detail-location">{location}</div>
-                  <div className="doctor-card-detail-clinic">{clinic}</div>
-                  <div className="doctor-card-detail-consultationfees">Ratings: {consultationFees}</div>
-                </div>
-              </div>
-              {isAppointmentBooked ? (
-                <div>
-                  <h3 style={{ textAlign: 'center' }}>Appointment Booked!</h3>
-                  <button onClick={() => { close(); handleCancel(); }}>Cancel Appointment</button>
-                </div>
-              ) : (
-                <AppointmentForm doctorName={name} onSubmit={handleFormSubmit} />
-              )}
+          <div className="doctor-card-details-container">
+            <div className="doctor-card-profile-image-container">
+              <img src={profilePic} alt={name} />
             </div>
-          )}
-        </Popup>
-        {isAppointmentBooked && appointmentData && (
-            <AppointmentCard doctorName={name} appointmentData={appointmentData} />
-        )}
+            <div className="doctor-card-details">
+              <div className="doctor-card-detail-name">{name}</div>
+              <div className="doctor-card-detail-speciality">{speciality}</div>
+              <div className="doctor-card-detail-experience">{experience} years experience overall</div>
+              {/* <div className="doctor-card-detail-location">{location}</div> */}
+              <div className="doctor-card-detail-clinic">Stay healthy</div>
+              <div className="doctor-card-detail-consultationfees">Ratings: {consultationFees}</div>
+            </div>
+          </div>
+          <div className="doctor-card-options-container">
+            <Popup
+              style={{ backgroundColor: '#FFFFFF' }}
+              trigger={
+                // <button className={`book-appointment-btn ${isAppointmentBooked ? 'cancel-appointment' : ''}`}>
+                //   {isAppointmentBooked ? (
+                //     <div>Cancel Appointment</div>
+                //   ) : (
+                //     <div>Book Appointment</div>
+                //   )}
+                //   <div>No Booking Fee</div>
+                // </button>
+                <button className={`book-appointment-btn ${appointments.length > 0 ? 'cancel-appointment' : ''}`}>
+                  {appointments.length > 0 ? (
+                    <div>Cancel Appointment</div>
+                  ) : (
+                    <div>Book Appointment</div>
+                  )}
+                  <div>No Booking Fee</div>
+                </button>
+              }
+              modal
+              open={showModal}
+              onClose={() => setShowModal(false)}
+            >
+              {(close) => (
+                <div className="doctorbg" style={{ height: '100vh', overflow: 'scroll' }}>
+                  <div>
+                    <div className="doctor-card-profile-image-container">
+                      <img src={profilePic} alt={name} />
+                    </div>
+                    <div className="doctor-card-details">
+                      <div className="doctor-card-detail-name">{name}</div>
+                      <div className="doctor-card-detail-speciality">{speciality}</div>
+                      <div className="doctor-card-detail-experience">{experience} years experience overall</div>
+                      <div className="doctor-card-detail-location">{location}</div>
+                      <div className="doctor-card-detail-clinic">{clinic}</div>
+                      <div className="doctor-card-detail-consultationfees">Ratings: {consultationFees}</div>
+                    </div>
+                  </div>
+                  {/* {isAppointmentBooked ? (
+                    <div>
+                      <h3 style={{ textAlign: 'center' }}>Appointment Booked!</h3>
+                      <button onClick={() => { close(); handleCancel(); }}>Cancel Appointment</button>
+                    </div>
+                  ) : (
+                    <AppointmentForm doctorName={name} onSubmit={handleFormSubmit} />
+                  )} */}
+                  {appointments.length > 0 ? (
+                    <>
+                      <h3 style={{ textAlign: 'center' }}>Appointment Booked!</h3>
+                      {appointments.map(appointment => (
+                        <div key={appointment.id}>
+                          <p>Name: {appointment.name}</p>
+                          <p>Phone Number: {appointment.phoneNumber}</p>
+                          <p>Date of Appointment: {appointment.date}</p>
+                          <p>Time Slot: {appointment.time}</p>
+                          <button onClick={() => handleCancel(appointment.id)}>Cancel Appointment</button>
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <AppointmentForm doctorName={name} doctorSpeciality={speciality} onSubmit={handleFormSubmit} />
+                  )}
+                </div>
+              )}
+            </Popup>
 
-      </div>
-    </div>
+          </div>
+        </div>
     );
 };
 
