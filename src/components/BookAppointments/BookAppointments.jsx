@@ -44,11 +44,11 @@ const BookAppointments = () => {
                 // 
                 doctor.speciality.toLowerCase().includes(searchText.toLowerCase())
                 
-                );
+            );
                 
             setFilteredDoctors(filtered);
             setIsSearched(true);
-            window.reload()
+            window.location.reload()
         }
         };
         
