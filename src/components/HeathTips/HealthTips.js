@@ -269,7 +269,7 @@ const HealthTips = () => {
   ];
   
   return (
-    <div className="health-tips-container">
+    <div className="health-tips-container" style={{marginTop:'5%'}}>
       <h1 className="health-tips-title">Health Tips and Guidance</h1>
       <div className="health-tips-list">
         {healthTips.map((tip) => (
