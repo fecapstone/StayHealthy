@@ -18,7 +18,7 @@ const demoData = [
     },
     {
         imageSrc: 'https://img.freepik.com/free-vector/hospital-service-concept-flat-illustration_1150-50287.jpg?size=626&ext=jpg',
-        title: 'Health tips & guidence',
+        title: 'Health tips and guidance',
     },
 ]
 const healthQuotes = [
@@ -193,19 +193,33 @@ const Services = () => {
                     </p>}
                     </p>
                     <div class="services__grid">
-                        {demoData.map((data, index) => (
-                            <div className="services__card" key={index}>
-                                <img src={data.imageSrc} alt="services" />
-                                <div className="services__details">
-                                {data.title === 'Book an appointment' ? (
-                                    <Link to="/search/doctors">
-                                        <p>{data.title}</p>
-                                    </Link>
-                                    ) : (
-                                    <p>{data.title}</p>
-                                )}
-                                </div>
+                    {demoData.map((data, index) => (
+                        <div className="services__card" key={index}>
+                            <img src={data.imageSrc} alt="services" />
+                            <div className="services__details">
+                            {data.title === 'Book an appointment' ? (
+                                <Link to="/book-appointment">
+                                <p>{data.title}</p>
+                                </Link>
+                            ) : data.title === 'Instant Consultation' ? (
+                                <Link to="/instant-consultation">
+                                <p>{data.title}</p>
+                                </Link>
+                            ) : data.title === 'Find a doctor' ? (
+                                <Link to="/find-doctor">
+                                <p>{data.title}</p>
+                                </Link>
+                            ) : data.title === 'Health tips and guidance' ? (
+                                <Link to="/healthblog">
+                                <p>{data.title}</p>
+                                </Link>
+                            ) : (
+                            <p>
+                            {data.title}
+                            </p>
+                            )}
                             </div>
+                        </div>
                         ))}
                     </div>
                 </div>
