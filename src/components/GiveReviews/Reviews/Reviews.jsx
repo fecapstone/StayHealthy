@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GiveReviews from '../GiveReviews';
 import Popup from 'reactjs-popup';
 import './Reviews.css';
+import { useNavigate } from 'react-router-dom';
 
 const Reviews = () => {
   const [reviewData, setReviewData] = useState({});
@@ -37,7 +38,13 @@ const Reviews = () => {
       [serialNumber]: review
     }));
   };
-
+  const navigate = useNavigate();
+  useEffect(() => {
+      const authtoken = sessionStorage.getItem("auth-token");
+      if (!authtoken) {
+          navigate("/login");
+      }
+  }, [])
   return (
     <div style={{ marginTop: '10%' }} className="reviews-container">
       <h1>Reviews</h1>
