@@ -23,6 +23,13 @@ const Navbar = () => {
         localStorage.removeItem("doctorData");
         setIsLoggedIn(false);
         setUsername("");
+        // Remove the reviewFormData from local storage
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key.startsWith("reviewFormData_")) {
+            localStorage.removeItem(key);
+          }
+        }
         window.location.reload();
     }
     const handleDropdown = () => {

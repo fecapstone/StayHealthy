@@ -36,8 +36,8 @@ const Login = () => {
         },
         body: JSON.stringify({
             name: name,
-            email: email,
-            phone: phone,
+            // email: email,
+            // phone: phone,
             password: password,
         }),
     });
@@ -46,8 +46,8 @@ const Login = () => {
     if (json.authtoken) {
         sessionStorage.setItem('auth-token', json.authtoken);
         sessionStorage.setItem('name', name);
-        sessionStorage.setItem('phone', phone);
-        sessionStorage.setItem('email', email);
+        // sessionStorage.setItem('phone', phone);
+        // sessionStorage.setItem('email', email);
         // Redirect to home page
         navigate('/');
         window.location.reload()
@@ -81,14 +81,14 @@ const Login = () => {
                     <label htmlFor="username">UserName</label>
                     <input value={name} type="text" onChange={(e) => setName(e.target.value)}  name="name" id="username" className="form-control" placeholder="Enter your username" aria-describedby="helpId" />
                   </div>
-                  <div className="form-group">
+                  {/* <div className="form-group">
                         <label htmlFor="phone">Phone</label>
                         <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" name="phone" id="phone" className="form-control" placeholder="Enter your phone number" aria-describedby="helpId" />
-                    </div>
-                    <div className="form-group">
+                    </div> */}
+                    {/* <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="form-control" placeholder="Enter your email" aria-describedby="helpId" />
-                    </div>
+                    </div> */}
                   <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input value={password} onChange={(e) => setPassword(e.target.value)} type={passwordVisible ? 'text' : 'password'} name="password" id="password" className="form-control" placeholder="Enter your password" aria-describedby="helpId" />
