@@ -91,8 +91,8 @@ router.post('/register',[
 // Route 2: Authenticating an existing user: POST: http://localhost:8181/api/auth/login. No Login Required
 router.post('/login', [
     body('name', "Username should be at least 4 characters.").isLength({ min: 4 }),
-    body('email', "Please Enter a Vaild Email").isEmail(),
-    body('phone', "Phone Number Should Be 10 Digits.").isLength({ min: 10 }),
+    // body('email', "Please Enter a Vaild Email").isEmail(),
+    // body('phone', "Phone Number Should Be 10 Digits.").isLength({ min: 10 }),
     body('password', "Password Should Be At Least 8 Characters.").isLength({ min: 8 }),
 ], async (req, res) => {
 
@@ -138,10 +138,46 @@ router.post('/login', [
 
 
 // Route 3: Updating existing specific User details login required
+// router.put('/update', [
+//     body('email', "Please enter a valid email").isEmail(),
+//     body('name', "Username should be at least 4 characters").isLength({ min: 4 }),
+//     body('phone', "Phone number should be 10 digits").isLength({ min: 10 }),
+// ], async (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//         return res.status(400).json({ errors: errors.array() });
+//     }
+
+//     try {
+//         const { email, name, phone } = req.body;
+
+//         const existingUser = await UserSchema.findOne({ email });
+//         if (!existingUser) {
+//         return res.status(404).json({ error: "User not found" });
+//         }
+
+//         existingUser.name = name;
+//         existingUser.phone = phone;
+//         existingUser.updatedAt = Date();
+
+//         const updatedUser = await existingUser.save();
+
+//         const payload = {
+//         user: {
+//             id: updatedUser.id,
+//         },
+//         };
+
+//         const authtoken = jwt.sign(payload, JWT_SECRET);
+//         res.json({ authtoken });
+//     } catch (error) {
+//         console.error(error);
+//         return res.status(500).send("Internal Server Error");
+//     }
+// });
+
 router.put('/update', [
-    body('email', "Please enter a valid email").isEmail(),
     body('name', "Username should be at least 4 characters").isLength({ min: 4 }),
-    body('phone', "Phone number should be 10 digits").isLength({ min: 10 }),
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -149,23 +185,22 @@ router.put('/update', [
     }
 
     try {
-        const { email, name, phone } = req.body;
+        const { name } = req.body;
 
-        const existingUser = await UserSchema.findOne({ email });
+        const existingUser = await UserSchema.findOne({ username: name });
         if (!existingUser) {
-        return res.status(404).json({ error: "User not found" });
+            return res.status(404).json({ error: "User not found" });
         }
 
         existingUser.name = name;
-        existingUser.phone = phone;
         existingUser.updatedAt = Date();
 
         const updatedUser = await existingUser.save();
 
         const payload = {
-        user: {
-            id: updatedUser.id,
-        },
+            user: {
+                id: updatedUser.id,
+            },
         };
 
         const authtoken = jwt.sign(payload, JWT_SECRET);

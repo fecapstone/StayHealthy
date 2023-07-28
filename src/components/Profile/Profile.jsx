@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../../config";
-import './Profile.css';
+import "./Profile.css";
 import { useNavigate } from "react-router-dom";
+
 const Profile = () => {
   const [userDetails, setUserDetails] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [updatedDetails, setUpdatedDetails] = useState({});
 
   const navigate = useNavigate();
+
   useEffect(() => {
-    fetchUserProfile();
     const authtoken = sessionStorage.getItem("auth-token");
-        if (!authtoken) {
-            navigate("/login");
-        }
-  }, []);
+    if (!authtoken) {
+      navigate("/login");
+    } else {
+      fetchUserProfile();
+    }
+  }, [navigate]);
 
   const fetchUserProfile = () => {
     try {
       const storedName = sessionStorage.getItem("name");
-      const storedPhone = sessionStorage.getItem("phone");
-      const storedEmail = sessionStorage.getItem("email");
-
-      if (storedName && storedPhone && storedEmail) {
+      if (storedName) {
         const storedUserDetails = {
           name: storedName,
-          phone: storedPhone,
-          email: storedEmail,
+          // phone: sessionStorage.getItem("phone"),
+          // email: sessionStorage.getItem("email"),
         };
 
         setUserDetails(storedUserDetails);
@@ -53,40 +53,39 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-        const userEmail = sessionStorage.getItem("email"); // Retrieve the user email from session storage
-        const payload = { ...updatedDetails, email: userEmail }; // Include the user email in the request payload
-        const response = await fetch(`${API_URL}/api/auth/update`, {
-            method: "PUT",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-        });
-    
-        if (response.ok) {
-            // Update the user details in session storage
-            sessionStorage.setItem("name", updatedDetails.name);
-            sessionStorage.setItem("phone", updatedDetails.phone);
-            sessionStorage.setItem("email", updatedDetails.email);
-    
-            setUserDetails(updatedDetails);
-            setEditMode(false);
-            // Display success message to the user
-            alert(`Profile Updated Successfully!`);
-            navigate("/");
-            window.location.reload();
-        } else {
-            // Handle error case
-            throw new Error('Failed to update profile');
-        }
-        } catch (error) {
-        console.error(error);
+      const username = sessionStorage.getItem("name");
+      const payload = { ...updatedDetails, name: username };
+      const response = await fetch(`${API_URL}/api/auth/update`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        // Update the user details in session storage
+        sessionStorage.setItem("name", updatedDetails.name);
+        // sessionStorage.setItem("phone", updatedDetails.phone);
+        // sessionStorage.setItem("email", updatedDetails.email);
+
+        setUserDetails(updatedDetails);
+        setEditMode(false);
+        // Display success message to the user
+        alert(`Profile Updated Successfully!`);
+        navigate("/");
+        window.location.reload(); // You might not need this line, navigate should handle the redirection
+      } else {
         // Handle error case
-        }
-    };
-    
+        throw new Error("Failed to update profile");
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle error case
+    }
+  };
 
   return (
     <div className="profile-container">
@@ -101,7 +100,7 @@ const Profile = () => {
               onChange={handleInputChange}
             />
           </label>
-          <label>
+          {/* <label>
             Phone:
             <input
               type="text"
@@ -118,14 +117,14 @@ const Profile = () => {
               value={updatedDetails.email}
               onChange={handleInputChange}
             />
-          </label>
+          </label> */}
           <button type="submit">Save</button>
         </form>
       ) : (
         <div className="profile-details">
           <h1>Welcome, {userDetails.name}</h1>
-          <p>Phone: {userDetails.phone}</p>
-          <p>Email: {userDetails.email}</p>
+          {/* <p>Phone: {userDetails.phone}</p>
+          <p>Email: {userDetails.email}</p> */}
           <button onClick={handleEdit}>Edit</button>
         </div>
       )}

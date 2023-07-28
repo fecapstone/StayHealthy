@@ -127,7 +127,7 @@ const AppointmentForm = ({ doctorName, doctorSpeciality, onSubmit }) => {
     );
 };
 
-const DoctorCard = ({ name, speciality, experience, location, clinic, consultationFees, profilePic }) => {
+const DoctorCard = ({ name, speciality, experience, clinic, ratings, profilePic }) => {
   const [showModal, setShowModal] = useState(false);
   // const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
   // const [appointmentData, setAppointmentData] = useState(null);
@@ -208,10 +208,10 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
             <div className="doctor-card-details">
               <div className="doctor-card-detail-name">{name}</div>
               <div className="doctor-card-detail-speciality">{speciality}</div>
-              <div className="doctor-card-detail-experience">{experience} years experience overall</div>
+              <div className="doctor-card-detail-experience">{experience} years experience</div>
               {/* <div className="doctor-card-detail-location">{location}</div> */}
-              <div className="doctor-card-detail-clinic">Stay healthy</div>
-              <div className="doctor-card-detail-consultationfees">Ratings: {consultationFees}</div>
+              {/* <div className="doctor-card-detail-clinic">Stay healthy</div> */}
+              <div className="doctor-card-detail-consultationfees">Ratings: {ratings}</div>
             </div>
           </div>
           <div className="doctor-card-options-container">
@@ -240,10 +240,10 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
                     <div className="doctor-card-details">
                       <div className="doctor-card-detail-name">{name}</div>
                       <div className="doctor-card-detail-speciality">{speciality}</div>
-                      <div className="doctor-card-detail-experience">{experience} years experience overall</div>
-                      <div className="doctor-card-detail-location">{location}</div>
+                      <div className="doctor-card-detail-experience">{experience} years experience </div>
+                      {/* <div className="doctor-card-detail-location">{location}</div>/ */}
                       <div className="doctor-card-detail-clinic">{clinic}</div>
-                      <div className="doctor-card-detail-consultationfees">Ratings: {consultationFees}</div>
+                      <div className="doctor-card-detail-consultationfees">Ratings: {ratings}</div>
                     </div>
                   </div>
                   
@@ -251,13 +251,15 @@ const DoctorCard = ({ name, speciality, experience, location, clinic, consultati
                     <>
                       <h3 style={{ textAlign: 'center' }}>Appointment Booked!</h3>
                       {appointments.map(appointment => (
-                        <div key={appointment.id}>
-                          <p>Name: {appointment.name}</p>
-                          <p>Phone Number: {appointment.phoneNumber}</p>
-                          <p>Date of Appointment: {appointment.date}</p>
-                          <p>Time Slot: {appointment.time}</p>
-                          <button onClick={() => handleCancel(appointment.id)}>Cancel Appointment</button>
-                        </div>
+                        // <center>
+                          <div className="bookedInfo" key={appointment.id}>
+                            <p>Name: {appointment.name}</p>
+                            <p>Phone Number: {appointment.phoneNumber}</p>
+                            <p>Date of Appointment: {appointment.date}</p>
+                            <p>Time Slot: {appointment.time}</p>
+                            <button onClick={() => handleCancel(appointment.id)}>Cancel Appointment</button>
+                          </div>
+                        // </center>
                       ))}
                     </>
                   ) : (

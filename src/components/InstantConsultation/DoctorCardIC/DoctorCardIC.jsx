@@ -121,7 +121,7 @@ const DoctorCardIC = ({ name, speciality, experience, location, clinic, consulta
                 <>
                   <h3 style={{ textAlign: 'center' }}>Appointment Booked!</h3>
                   {appointments.map((appointment) => (
-                    <div key={appointment.id}>
+                    <div className="bookedInfo" key={appointment.id}>
                       <p>Name: {appointment.name}</p>
                       <p>Phone Number: {appointment.phoneNumber}</p>
                       <button onClick={() => handleCancel(appointment.id)}>Cancel Appointment</button>

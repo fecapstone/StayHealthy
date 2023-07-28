@@ -52,6 +52,21 @@ const GiveReviews = ({ serialNumber, onReviewSubmit, review }) => {
     }
   };
 
+  const renderStar = (rating) => {
+    const starClasses = `star ${formData.rating >= rating ? 'filled' : ''} ${formData.rating === rating ? 'clicked' : ''}`;
+  
+    return (
+      <span
+        key={rating}
+        className={starClasses}
+        onClick={() => handleRatingChange(rating)}
+      >
+        ⭐️
+      </span>
+    );
+  };
+  
+
   if (submitted) {
     return (
       <div className="review-box">
@@ -85,21 +100,9 @@ const GiveReviews = ({ serialNumber, onReviewSubmit, review }) => {
         <div>
           <label htmlFor="rating">Rating:</label>
           <div className="star-rating">
-            {[1, 2, 3, 4, 5].map((rating) => (
-              <label key={rating}>
-                <input
-                  type="radio"
-                  name="rating"
-                  value={rating}
-                  checked={formData.rating === rating}
-                  onChange={() => handleRatingChange(rating)}
-                />
-                {Array(rating).fill('⭐️').join('')}
-              </label>
-            ))}
+            {[1, 2, 3, 4, 5].map((rating) => renderStar(rating))}
             <br />
           </div>
-          0 → 5
         </div>
         <button type="submit">Submit</button>
       </form>
