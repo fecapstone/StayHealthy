@@ -57,12 +57,13 @@ const Login = () => {
             <h2>Login</h2>
           </div>
           <div className="login-text">
-            Are you a New Member? <span><Link to="/signup" style={{ color: '#2190FF' }}> Signup Here</Link></span>
+            Are you a new member? <span><Link to="/signup" style={{ color: '#2190FF' }}> Sign Up Here</Link></span>
           </div>
+          <br />
           <div className="login-form">
             <form onSubmit={login}>
               <div className="form-group">
-                <label htmlFor="username">UserName</label>
+                <label htmlFor="username">Username</label>
                 <input
                   value={name}
                   type="text"
@@ -95,8 +96,9 @@ const Login = () => {
                 <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Login</button>
                 <button type="reset" className="btn btn-danger mb-2 waves-effect waves-light">Reset</button>
               </div>
-              <div className="login-text">
-                Forget Password <span><Link to="/signup" style={{ color: '#2190FF' }}> Signup Here</Link></span>
+              <br />
+              <div className="login-text" style={{textAlign:'center'}}>
+                Forgot Password?
               </div>
             </form>
           </div>

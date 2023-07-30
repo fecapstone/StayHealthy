@@ -87,7 +87,7 @@ const GiveReviews = ({ serialNumber, onReviewSubmit, review }) => {
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-        <h2>Give Your Review</h2>
+        <h2>Give Your Feedback</h2>
         {showWarning && <p className="warning">Please fill out all fields.</p>}
         <div>
           <label htmlFor="name">Name:</label>

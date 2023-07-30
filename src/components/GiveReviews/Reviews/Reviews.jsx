@@ -12,14 +12,14 @@ const Reviews = () => {
       serialNumber: 1,
       doctorName: 'Dr. John Doe',
       doctorSpeciality: 'Cardiology',
-      charges: '$100',
+      // charges: '$100',
       reportUrl: 'https://example.com/report1',
     },
     {
       serialNumber: 2,
       doctorName: 'Dr. Jane Smith',
       doctorSpeciality: 'Dermatology',
-      charges: '$80',
+      // charges: '$80',
       reportUrl: 'https://example.com/report2',
     },
     // Add more report data objects as needed
@@ -54,7 +54,7 @@ const Reviews = () => {
             <th>Serial Number</th>
             <th>Doctor Name</th>
             <th>Doctor Speciality</th>
-            <th>Charges</th>
+            {/* <th>Charges</th> */}
             <th>Give Review</th>
             <th>Review Given</th>
           </tr>
@@ -65,7 +65,7 @@ const Reviews = () => {
               <td>{report.serialNumber}</td>
               <td>{report.doctorName}</td>
               <td>{report.doctorSpeciality}</td>
-              <td>{report.charges}</td>
+              {/* <td>{report.charges}</td> */}
               <td>
                 {!reviewData[report.serialNumber] ? (
                   <Popup

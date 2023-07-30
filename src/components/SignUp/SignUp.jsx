@@ -28,9 +28,9 @@ const SignUp = () => {
     let signupRoleText = '';
 
     if (role === 'doctor') {
-        signupRoleText = 'Signup as a Doctor';
+        signupRoleText = 'Sign up as a Doctor';
     } else if (role === 'patient') {
-        signupRoleText = 'Signup as a Patient';
+        signupRoleText = 'Sign up as a Patient';
     }
     const navigate = useNavigate();
 
@@ -77,16 +77,16 @@ const SignUp = () => {
         <div className="container" style={{marginTop:'5%'}}>
             <div className="signup-grid">
                 <div className="signup-text">
-                    <h1>Signup</h1>
+                    <h1>Sign Up</h1>
                     {signupRoleText && <div className="signup-role">{signupRoleText}</div>}
                 </div>
-                <div className="signup-text1">
-                    Already a member? <span ><Link to="/login" style={{color:'#2190FF'}}> Login In</Link></span>
+                <div className="signup-text1" style={{textAlign:'left'}}>
+                    Already a member? <span ><Link to="/login" style={{color:'#2190FF'}}> Login</Link></span>
                 </div>
                 <div className="signup-form">
                 <form method="POST" onSubmit={register}>
                     <div className="form-group">
-                        <label htmlFor="role">Signup Role</label>
+                        <label htmlFor="role">Sign Up Role</label>
                         <select name="role" id="role" className="form-control" onChange={(e) => updateSignupRoleText(e.target.value)}>
                             <option value="">Select Role</option>
                             <option value="doctor" onChange={(e) => setName(e.target.value)}>Doctor</option>
@@ -94,8 +94,8 @@ const SignUp = () => {
                         </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="name">UserName</label>
-                        <input value={name} type="text" onChange={(e) => setName(e.target.value)} name="name" id="name" className="form-control" placeholder="Enter your name" aria-describedby="helpId" />
+                        <label htmlFor="name">Username</label>
+                        <input value={name} type="text" onChange={(e) => setName(e.target.value)} name="name" id="name" className="form-control" placeholder="Enter your username" aria-describedby="helpId" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="phone">Phone</label>

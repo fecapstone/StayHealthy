@@ -209,6 +209,11 @@ const Services = () => {
                                 <Link to="/find-doctor">
                                 <p>{data.title}</p>
                                 </Link>
+                            // : data.title === 'Find a doctor' ? (
+                            //     <Link to="/find-doctor">
+                            //     <p>{data.title}</p>
+                            //     </Link>
+                            
                             ) : data.title === 'Health tips and guidance' ? (
                                 <Link to="/healthblog">
                                 <p>{data.title}</p>

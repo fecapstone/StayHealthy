@@ -16,14 +16,14 @@ const Reports = () => {
         serialNumber: 1,
         doctorName: 'Dr. John Doe',
         doctorSpeciality: 'Cardiology',
-        charges: '100',
+        // charges: '100',
         reportUrl: 'https://drive.google.com/file/d/1O6y2aMWxA48GAZqJL-9Rh9LNM-YXhL-T/view',
         },
         {
         serialNumber: 2,
         doctorName: 'Dr. Jane Smith',
         doctorSpeciality: 'Dermatology',
-        charges: '80',
+        // charges: '80',
         reportUrl: 'https://drive.google.com/file/d/1O6y2aMWxA48GAZqJL-9Rh9LNM-YXhL-T/view',
         },
         // Add more report data objects as needed
@@ -38,7 +38,7 @@ const Reports = () => {
                 <th>Serial Number</th>
                 <th>Doctor Name</th>
                 <th>Doctor Speciality</th>
-                <th>Charges</th>
+                {/* <th>Charges</th> */}
                 <th>View Report</th>
                 <th>Download Report</th>
             </tr>
@@ -49,14 +49,14 @@ const Reports = () => {
                 <td>{report.serialNumber}</td>
                 <td>{report.doctorName}</td>
                 <td>{report.doctorSpeciality}</td>
-                <td>{report.charges}</td>
+                {/* <td>{report.charges}</td> */}
                 <td>
-                    <a target='_blank' href={report.reportUrl} className="report-link" rel="noreferrer">
+                    <a target='_blank' href='Patient_Information.pdf' className="report-link" rel="noreferrer">
                         View Report
                     </a>
                 </td>
                 <td>
-                    <a target='_blank' href={report.reportUrl} download className="report-link" rel="noreferrer">
+                    <a target='_blank' href='Patient_Information.pdf' download className="report-link" rel="noreferrer">
                         Download Report
                     </a>
                 </td>

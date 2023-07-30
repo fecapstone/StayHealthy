@@ -8,6 +8,7 @@ import { BookAppointments, GiveReviews, Home, Login, Profile, Reports, Reviews, 
 import HealthTips from './components/HeathTips/HealthTips';
 import Setauthtoken from './Setauthtoken';
 import InstantConsultation from './components/InstantConsultation/InstantConsultation';
+import SelfCheckup from './components/SelfCheckup';
 
 function App() {
   useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/instant-consultation" element={<InstantConsultation />} />
+                <Route path="/self-checkup" element={<SelfCheckup />} />
 
                 <Route
                   path="/setauthtoken/:authtoken"
